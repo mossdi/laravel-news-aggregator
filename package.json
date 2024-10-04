@@ -30,6 +30,7 @@
         "vue-tsc": "^2.0.24"
     },
     "dependencies": {
+        "@mossdi/laravel-news-aggregator-openapi": "file:../laravel-news-aggregator-openapi",
         "laravel-vue-pagination": "^4.1.3"
     }
 }
