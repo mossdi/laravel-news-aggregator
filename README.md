@@ -11,6 +11,7 @@
 - composer install
 - php artisan migrate --seed
 - php artisan key:generate
+- /usr/bin/supervisord
 
 **Регистрация с двухфакторной аутентификацеий.**
 
