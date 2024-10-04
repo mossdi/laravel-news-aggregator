@@ -3,9 +3,18 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\ResourceCollection;
+use OpenApi\Attributes as OA;
 
-class ArticleCollection extends ResourceCollection
+#[OA\Schema(
+    properties: [
+        new OA\Property(
+            property: 'data',
+            type: 'array',
+            items: new OA\Items(ref: '#/components/schemas/Article')
+        ),
+    ]
+)]
+class ArticleCollection extends BaseResourceCollection
 {
     /**
      * Transform the resource collection into an array.

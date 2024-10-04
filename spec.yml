@@ -1,0 +1,123 @@
+openapi: 3.0.0
+info:
+  title: news-aggregator
+  version: 1.0.0
+servers:
+  -
+    url: 'http://127.0.0.1:8080/'
+paths:
+  /api/v1/articles:
+    get:
+      operationId: getArticles
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HttpRequest'
+      responses:
+        '200':
+          description: getArticlesResponse
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArticleCollection'
+components:
+  schemas:
+    FilterDto:
+      properties:
+        column:
+          type: string
+        search:
+          type: string
+        operator:
+          type: string
+          default: like
+          enum:
+            - like
+            - '='
+            - '>'
+            - '<'
+            - '>='
+            - '<='
+            - in
+      type: object
+    SortDto:
+      properties:
+        column:
+          type: string
+        direction:
+          $ref: '#/components/schemas/SortDirection'
+      type: object
+    SortDirection:
+      properties:
+        DESC:
+          type: object
+          enum:
+            - desc
+        ASC:
+          type: object
+          enum:
+            - asc
+      type: string
+      enum:
+        - DESC
+        - ASC
+    HttpRequest:
+      properties:
+        page:
+          type: integer
+        limit:
+          type: integer
+        sort:
+          $ref: '#/components/schemas/SortDto'
+        filters:
+          type: array
+          items:
+            $ref: '#/components/schemas/FilterDto'
+      type: object
+    Article:
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        content:
+          type: string
+        source:
+          type: string
+      type: object
+    ArticleCollection:
+      type: object
+      allOf:
+        -
+          $ref: '#/components/schemas/BaseResourceCollection'
+        -
+          properties:
+            data:
+              type: array
+              items:
+                $ref: '#/components/schemas/Article'
+          type: object
+    BaseResourceCollection:
+      properties:
+        links:
+          properties:
+            first:
+              type: string
+            last:
+              type: string
+            prev:
+              type: string
+            next:
+              type: string
+          type: object
+        path:
+          type: string
+        per_page:
+          type: integer
+        to:
+          type: integer
+        total:
+          type: integer
+      type: object
