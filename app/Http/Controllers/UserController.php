@@ -14,7 +14,7 @@ class UserController extends Controller
     {
     }
 
-    #[OA\Get(
+    #[OA\Post(
         path: '/api/v1/users',
         operationId: 'getUsers',
     )]

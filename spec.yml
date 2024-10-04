@@ -7,7 +7,7 @@ servers:
     url: 'http://127.0.0.1:8080/'
 paths:
   /api/v1/articles:
-    get:
+    post:
       operationId: getArticles
       requestBody:
         required: false
@@ -23,7 +23,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ArticleCollection'
   /api/v1/users:
-    get:
+    post:
       operationId: getUsers
       requestBody:
         required: false

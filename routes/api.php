@@ -12,7 +12,7 @@ Route::middleware([
 ])
     ->prefix('v1')
     ->group(function () {
-        Route::get('users', [UserController::class, 'index']);
+        Route::post('users', [UserController::class, 'index']);
 
-        Route::get('articles', [ArticleController::class, 'index']);
+        Route::post('articles', [ArticleController::class, 'index']);
     });

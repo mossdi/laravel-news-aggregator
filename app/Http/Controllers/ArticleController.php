@@ -14,7 +14,7 @@ class ArticleController extends Controller
     {
     }
 
-    #[OA\Get(
+    #[OA\Post(
         path: '/api/v1/articles',
         operationId: 'getArticles',
     )]
