@@ -22,6 +22,22 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ArticleCollection'
+  /api/v1/users:
+    get:
+      operationId: getUsers
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HttpRequest'
+      responses:
+        '200':
+          description: getUsersResponse
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserCollection'
 components:
   schemas:
     FilterDto:
@@ -121,3 +137,24 @@ components:
         total:
           type: integer
       type: object
+    User:
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+      type: object
+    UserCollection:
+      type: object
+      allOf:
+        -
+          $ref: '#/components/schemas/BaseResourceCollection'
+        -
+          properties:
+            data:
+              type: array
+              items:
+                $ref: '#/components/schemas/User'
+          type: object

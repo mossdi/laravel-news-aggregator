@@ -20,7 +20,7 @@ class ArticleController extends Controller
     )]
     #[OA\RequestBody(
         required: false,
-        content : [new OA\JsonContent(ref: '#/components/schemas/HttpRequest')]
+        content: [new OA\JsonContent(ref: '#/components/schemas/HttpRequest')]
     )]
     #[OA\Response(
         response: 200,
