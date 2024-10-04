@@ -4,12 +4,13 @@
 
 **Запуск:**
 - docker-compose up -d
-
-**В контейнере:**
-- composer install
-- php artisan migrate --seed
 - npm install
 - npm run dev
+
+**В контейнере bn.php-fpm:**
+- composer install
+- php artisan migrate --seed
+- php artisan key:generate
 
 **Регистрация с двухфакторной аутентификацеий.**
 
