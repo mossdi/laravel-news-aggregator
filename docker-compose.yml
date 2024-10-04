@@ -55,6 +55,15 @@ services:
     networks:
       - breaking-news-network
 
+  bn.openapi.codegen:
+    image: openapitools/openapi-generator-cli:latest
+    hostname: bn.openapi.codegen
+    volumes:
+      - ./spec.yml:/files/spec.yml:delegated
+      - ./ts-gen-config.json:/files/ts-gen-config.json:delegated
+      - ./../laravel-news-aggregator-openapi:/swagger-ts:delegated
+    command: /usr/local/bin/docker-entrypoint.sh generate -g typescript-fetch -i /files/spec.yml -o /swagger-ts -c /files/ts-gen-config.json --global-property skipFormModel=false
+
 volumes:
 
   bn.rabbitmq.data:

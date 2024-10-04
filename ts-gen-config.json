@@ -1,0 +1,7 @@
+﻿{
+    "npmName": "@mossdi/laravel-news-aggregator-openapi",
+    "useSingleRequestParameter": false,
+    "legacyDiscriminatorBehavior": false,
+    "disallowAdditionalPropertiesIfNotPresent": false,
+    "useObjectParameters": true
+}
