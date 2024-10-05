@@ -2,12 +2,13 @@
 
 namespace App\Dto\NewsAPI;
 
-use Illuminate\Contracts\Support\Arrayable;
+use App\Dto\BaseDto;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
+use Spatie\DataTransferObject\Exceptions\UnknownProperties;
 
-class EverythingResponse implements Arrayable
+class EverythingResponse extends BaseDto
 {
     private string $status;
     private int $totalResults;
@@ -17,11 +18,37 @@ class EverythingResponse implements Arrayable
      */
     private Collection $articles;
 
-    public function __construct(string $status, int $totalResults, Collection $articles)
+    /**
+     * @throws UnknownProperties
+     */
+    public static function fromResponse(Response $response): static
     {
-        $this->status = $status;
-        $this->totalResults = $totalResults;
-        $this->articles = $articles;
+        $data = json_decode($response->getBody()->getContents());
+
+        $articles = new Collection();
+
+        if (!empty($data->articles) && is_array($data->articles)) {
+            foreach ($data->articles as $article) {
+                if (empty($article->author)) continue; // TODO
+
+                $articles->add(
+                    Article::fromArray([
+                        'author' => $article->author,
+                        'title' => $article->title,
+                        'description' => $article->description,
+                        'url' => $article->url,
+                        'content' => $article->content,
+                        'published_at' => Carbon::parse($article->publishedAt),
+                    ])
+                );
+            }
+        }
+
+        return new static([
+            'status' => $data->status ?? 404, // TODO
+            'totalResults' => $articles->count(),
+            'articles' => $articles,
+        ]);
     }
 
     public function getStatus(): string
@@ -37,43 +64,5 @@ class EverythingResponse implements Arrayable
     public function getArticles(): Collection
     {
         return $this->articles;
-    }
-
-    public static function fromResponse(Response $response): static
-    {
-        $data = json_decode($response->getBody()->getContents());
-
-        $articles = new Collection();
-
-        if (!empty($data->articles) && is_array($data->articles)) {
-            foreach ($data->articles as $article) {
-                if (empty($article->author)) continue; // TODO
-
-                $articles->add(
-                    new Article(
-                        author: $article->author,
-                        title: $article->title,
-                        description: $article->description,
-                        url: $article->url,
-                        content: $article->content,
-                        published_at: Carbon::parse($article->publishedAt),
-                    )
-                );
-            }
-        }
-
-        return new static(
-            status: $data->status ?? 404, // TODO
-            totalResults: $articles->count(),
-            articles: $articles
-        );
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function toArray()
-    {
-        return get_object_vars($this);
     }
 }

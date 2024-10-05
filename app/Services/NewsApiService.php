@@ -7,11 +7,13 @@ use App\Dto\NewsAPI\EverythingResponse;
 use App\Interfaces\INewsApiService;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Support\Facades\Http;
+use Spatie\DataTransferObject\Exceptions\UnknownProperties;
 
 class NewsApiService implements INewsApiService
 {
     /**
      * @throws ConnectionException
+     * @throws UnknownProperties
      */
     public function everything(EverythingRequestParameters $parameters): EverythingResponse
     {

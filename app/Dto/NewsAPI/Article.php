@@ -2,10 +2,11 @@
 
 namespace App\Dto\NewsAPI;
 
-use Illuminate\Contracts\Support\Arrayable;
+use App\Dto\BaseDto;
 use Illuminate\Support\Carbon;
+use Spatie\DataTransferObject\Exceptions\UnknownProperties;
 
-class Article implements Arrayable
+class Article extends BaseDto
 {
     private string $author;
     private string $title;
@@ -16,21 +17,11 @@ class Article implements Arrayable
     private Carbon $published_at;
 
     /**
-     * @param string $author
-     * @param string $title
-     * @param string $description
-     * @param string $url
-     * @param string $content
-     * @param Carbon $published_at
+     * @throws UnknownProperties
      */
-    public function __construct(string $author, string $title, string $description, string $url, string $content, Carbon $published_at)
+    public function __construct(...$args)
     {
-        $this->author = $author;
-        $this->title = $title;
-        $this->description = $description;
-        $this->url = $url;
-        $this->content = $content;
-        $this->published_at = $published_at;
+        parent::__construct($args);
 
         $this->source = 'NewsAPI';
     }
@@ -65,16 +56,8 @@ class Article implements Arrayable
         return $this->source;
     }
 
-    public function getPublishedAt(): string
+    public function getPublishedAt(): Carbon
     {
         return $this->published_at;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function toArray()
-    {
-        return get_object_vars($this);
     }
 }

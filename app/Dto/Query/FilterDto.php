@@ -2,10 +2,11 @@
 
 namespace App\Dto\Query;
 
+use App\Dto\BaseDto;
 use OpenApi\Attributes as OA;
 
 #[OA\Schema]
-class FilterDto
+class FilterDto extends BaseDto
 {
     #[OA\Property]
     public string $column;

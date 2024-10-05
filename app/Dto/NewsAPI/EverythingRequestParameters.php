@@ -2,24 +2,20 @@
 
 namespace App\Dto\NewsAPI;
 
-use Illuminate\Contracts\Support\Arrayable;
+use App\Dto\BaseDto;
 
-class EverythingRequestParameters implements Arrayable
+class EverythingRequestParameters extends BaseDto
 {
     public ?string $q;
     public ?string $from;
 
-    public function __construct(string $q = null, string $from = null)
+    public function getQ(): ?string
     {
-        $this->q = $q;
-        $this->from = $from;
+        return $this->q;
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function toArray()
+    public function getFrom(): ?string
     {
-        return get_object_vars($this);
+        return $this->from;
     }
 }
