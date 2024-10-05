@@ -17,6 +17,7 @@ class UserController extends Controller
     #[OA\Post(
         path: '/api/v1/users',
         operationId: 'getUsers',
+        tags: ['User']
     )]
     #[OA\RequestBody(
         required: false,
@@ -31,10 +32,10 @@ class UserController extends Controller
     {
         return UserCollection::make(
             $this->repository->all(
-                $request->get('filters', []),
-                $request->get('exclusions', []),
-                $request->get('sort', []),
-                $request->get('per_page'),
+                $request->filters,
+                $request->exclusions,
+                $request->sort,
+                $request->perPage,
             )
         );
     }

@@ -17,6 +17,7 @@ class ArticleController extends Controller
     #[OA\Post(
         path: '/api/v1/articles',
         operationId: 'getArticles',
+        tags: ['Article']
     )]
     #[OA\RequestBody(
         required: false,
@@ -31,10 +32,10 @@ class ArticleController extends Controller
     {
         return ArticleCollection::make(
             $this->repository->all(
-                $request->get('filters', []),
-                $request->get('exclusions', []),
-                $request->get('sort', []),
-                $request->get('per_page', 20),
+                $request->filters,
+                $request->exclusions,
+                $request->sort,
+                $request->perPage,
             )
         );
     }

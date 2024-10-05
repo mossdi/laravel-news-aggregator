@@ -8,6 +8,8 @@ servers:
 paths:
   /api/v1/articles:
     post:
+      tags:
+        - Article
       operationId: getArticles
       requestBody:
         required: false
@@ -24,6 +26,8 @@ paths:
                 $ref: '#/components/schemas/ArticleCollection'
   /api/v1/users:
     post:
+      tags:
+        - User
       operationId: getUsers
       requestBody:
         required: false
@@ -40,6 +44,31 @@ paths:
                 $ref: '#/components/schemas/UserCollection'
 components:
   schemas:
+    ExclusionCollectionDto:
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExclusionDto'
+          nullable: true
+      type: object
+    ExclusionDto:
+      properties:
+        column:
+          type: string
+        search:
+          type: string
+        operator:
+          $ref: '#/components/schemas/ConditionOperator'
+      type: object
+    FilterCollectionDto:
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/FilterDto'
+          nullable: true
+      type: object
     FilterDto:
       properties:
         column:
@@ -47,16 +76,7 @@ components:
         search:
           type: string
         operator:
-          type: string
-          default: like
-          enum:
-            - like
-            - '='
-            - '>'
-            - '<'
-            - '>='
-            - '<='
-            - in
+          $ref: '#/components/schemas/ConditionOperator'
       type: object
     SortDto:
       properties:
@@ -65,6 +85,45 @@ components:
         direction:
           $ref: '#/components/schemas/SortDirection'
       type: object
+    ConditionOperator:
+      properties:
+        LIKE:
+          type: object
+          enum:
+            - like
+        EQUAL:
+          type: object
+          enum:
+            - '='
+        MORE:
+          type: object
+          enum:
+            - '>'
+        LESS:
+          type: object
+          enum:
+            - '<'
+        MORE_OR_EQUAL:
+          type: object
+          enum:
+            - '>='
+        LESS_OR_EQUAL:
+          type: object
+          enum:
+            - '<='
+        IN:
+          type: object
+          enum:
+            - in
+      type: string
+      enum:
+        - LIKE
+        - EQUAL
+        - MORE
+        - LESS
+        - MORE_OR_EQUAL
+        - LESS_OR_EQUAL
+        - IN
     SortDirection:
       properties:
         DESC:
@@ -81,16 +140,30 @@ components:
         - ASC
     HttpRequest:
       properties:
+        filters:
+          nullable: true
+          oneOf:
+            -
+              $ref: '#/components/schemas/FilterCollectionDto'
+        exclusions:
+          nullable: true
+          oneOf:
+            -
+              $ref: '#/components/schemas/ExclusionCollectionDto'
+        sort:
+          nullable: true
+          oneOf:
+            -
+              $ref: '#/components/schemas/SortDto'
         page:
           type: integer
+          nullable: true
         limit:
           type: integer
-        sort:
-          $ref: '#/components/schemas/SortDto'
-        filters:
-          type: array
-          items:
-            $ref: '#/components/schemas/FilterDto'
+          nullable: true
+        perPage:
+          type: integer
+          nullable: true
       type: object
     Article:
       properties:
@@ -158,3 +231,10 @@ components:
               items:
                 $ref: '#/components/schemas/User'
           type: object
+tags:
+  -
+    name: Article
+    description: Article
+  -
+    name: User
+    description: User

@@ -7,7 +7,7 @@ use App\Enums\ConditionOperator;
 use OpenApi\Attributes as OA;
 
 #[OA\Schema]
-class FilterDto extends BaseDto
+class ExclusionDto extends BaseDto
 {
     #[OA\Property]
     public string $column;
