@@ -39,10 +39,10 @@ class NewsApiJob implements ShouldQueue
      */
     public function handle(): void
     {
-        $articles = $this->newsApiService->everything($this->requestParameters);
+        $everythingResponse = $this->newsApiService->everything($this->requestParameters);
 
-        if ($articles->getArticles()->isNotEmpty()) {
-            Article::query()->insert($articles->getArticles()->toArray());
+        if ($everythingResponse->articles->isNotEmpty()) {
+            Article::query()->insert($everythingResponse->articles->toArray());
         }
     }
 }

@@ -10,13 +10,13 @@ use Spatie\DataTransferObject\Exceptions\UnknownProperties;
 
 class EverythingResponse extends BaseDto
 {
-    private string $status;
-    private int $totalResults;
+    public string $status;
+    public int $totalResults;
 
     /**
      * @var Collection<Article>
      */
-    private Collection $articles;
+    public Collection $articles;
 
     /**
      * @throws UnknownProperties
@@ -49,20 +49,5 @@ class EverythingResponse extends BaseDto
             'totalResults' => $articles->count(),
             'articles' => $articles,
         ]);
-    }
-
-    public function getStatus(): string
-    {
-        return $this->status;
-    }
-
-    public function getTotalResults(): int
-    {
-        return $this->totalResults;
-    }
-
-    public function getArticles(): Collection
-    {
-        return $this->articles;
     }
 }
