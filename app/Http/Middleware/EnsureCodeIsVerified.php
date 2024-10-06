@@ -36,7 +36,7 @@ class EnsureCodeIsVerified
         if (!$request->user() || ($request->user() instanceof IMustVerifyCode && !$request->user()->hasVerifiedCode())) {
             return $request->expectsJson()
                 ? abort(403, 'Your account is not verified.')
-                : Redirect::guest(URL::route($redirectToRoute ?: 'telegram.verification.notice'));
+                : Redirect::guest(URL::route($redirectToRoute ?: 'account.verification.notice'));
         }
 
         return $next($request);

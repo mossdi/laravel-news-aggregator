@@ -39,16 +39,16 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('telegram/verification/notice', TelegramVerificationNoticeController::class)
-        ->name('telegram.verification.notice');
+    Route::get('account/verification/notice', TelegramVerificationNoticeController::class)
+        ->name('account.verification.notice');
 
-    Route::post('telegram/verification/notification', TelegramVerificationNotificationController::class)
+    Route::post('account/verification/notification', TelegramVerificationNotificationController::class)
         ->middleware('throttle:6,1')
-        ->name('telegram.verification.notification');
+        ->name('account.verification.notification');
 
-    Route::post('telegram/verification/verify', TelegramVerificationVerifyController::class)
+    Route::post('account/verification/verify', TelegramVerificationVerifyController::class)
         ->middleware('throttle:6,1')
-        ->name('telegram.verification.verify');
+        ->name('account.verification.verify');
 
     Route::get('verify-email', EmailVerificationPromptController::class)
         ->name('verification.notice');
