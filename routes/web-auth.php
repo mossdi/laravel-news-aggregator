@@ -38,7 +38,7 @@ Route::middleware('guest')->group(function () {
         ->name('password.store');
 });
 
-Route::middleware(['auth', 'code-verified'])->group(function () {
+Route::middleware('auth')->group(function () {
     Route::get('telegram/verification/notice', TelegramVerificationNoticeController::class)
         ->name('telegram.verification.notice');
 
