@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\WebAuth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\AccountVerificationVerifyRequest;
+use App\Http\Requests\WebAuth\AccountVerificationVerifyRequest;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Http\RedirectResponse;
 

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\WebAuth;
 use App\Exceptions\TelegramApiKeyIsNull;
 use App\Exceptions\TelegramChatIdIsNull;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\RegisterUserRequest;
+use App\Http\Requests\WebAuth\RegisterUserRequest;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
