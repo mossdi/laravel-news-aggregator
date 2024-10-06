@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
-class TelegramVerificationNotificationController extends Controller
+class AccountVerificationNotificationController extends Controller
 {
     /**
      * Send a new code verification notification.

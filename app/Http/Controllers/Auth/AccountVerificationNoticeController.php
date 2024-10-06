@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 
-class TelegramVerificationNoticeController extends Controller
+class AccountVerificationNoticeController extends Controller
 {
     /**
      * Display the email verification prompt.

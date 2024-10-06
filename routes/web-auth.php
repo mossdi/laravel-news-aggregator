@@ -8,9 +8,9 @@ use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
-use App\Http\Controllers\Auth\TelegramVerificationNoticeController;
-use App\Http\Controllers\Auth\TelegramVerificationNotificationController;
-use App\Http\Controllers\Auth\TelegramVerificationVerifyController;
+use App\Http\Controllers\Auth\AccountVerificationNoticeController;
+use App\Http\Controllers\Auth\AccountVerificationNotificationController;
+use App\Http\Controllers\Auth\AccountVerificationVerifyController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 
@@ -39,14 +39,14 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('account/verification/notice', TelegramVerificationNoticeController::class)
+    Route::get('account/verification/notice', AccountVerificationNoticeController::class)
         ->name('account.verification.notice');
 
-    Route::post('account/verification/notification', TelegramVerificationNotificationController::class)
+    Route::post('account/verification/notification', AccountVerificationNotificationController::class)
         ->middleware('throttle:6,1')
         ->name('account.verification.notification');
 
-    Route::post('account/verification/verify', TelegramVerificationVerifyController::class)
+    Route::post('account/verification/verify', AccountVerificationVerifyController::class)
         ->middleware('throttle:6,1')
         ->name('account.verification.verify');
 

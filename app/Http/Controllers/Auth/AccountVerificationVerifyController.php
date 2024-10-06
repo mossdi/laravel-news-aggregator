@@ -3,16 +3,16 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\TelegramCodeVerificationRequest;
+use App\Http\Requests\Auth\AccountVerificationVerifyRequest;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Http\RedirectResponse;
 
-class TelegramVerificationVerifyController extends Controller
+class AccountVerificationVerifyController extends Controller
 {
     /**
      * Mark the authenticated user's email address as verified.
      */
-    public function __invoke(TelegramCodeVerificationRequest $request): RedirectResponse
+    public function __invoke(AccountVerificationVerifyRequest $request): RedirectResponse
     {
         if ($request->user()->hasVerifiedCode()) {
             return redirect()->intended(route('dashboard', absolute: false));
