@@ -9,7 +9,6 @@ use App\Models\Article;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Http\Client\ConnectionException;
-use Spatie\DataTransferObject\Exceptions\UnknownProperties;
 
 class NewsApiJob implements ShouldQueue
 {
@@ -18,10 +17,6 @@ class NewsApiJob implements ShouldQueue
     private string $q = 'bitcoin';
     private EverythingRequestParameters $requestParameters;
 
-    /**
-     * Create a new job instance.
-     * @throws UnknownProperties
-     */
     public function __construct(
         private readonly INewsApiService $newsApiService,
         private readonly ArticleHelper $articleHelper

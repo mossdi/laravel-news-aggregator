@@ -7,7 +7,6 @@ use App\Dto\Query\FilterCollectionDto;
 use App\Dto\Query\SortDto;
 use Illuminate\Foundation\Http\FormRequest;
 use OpenApi\Attributes as OA;
-use Spatie\DataTransferObject\Exceptions\UnknownProperties;
 
 #[OA\Schema]
 class HttpRequest extends FormRequest
@@ -30,9 +29,6 @@ class HttpRequest extends FormRequest
     #[OA\Property]
     public ?int $perPage = 20; // TODO
 
-    /**
-     * @throws UnknownProperties
-     */
     protected function prepareForValidation()
     {
         if (!empty($filters = $this->get('filters'))) {
