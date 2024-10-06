@@ -13,4 +13,10 @@ class SortDto extends BaseDto
 
     #[OA\Property(ref: '#/components/schemas/SortDirection')]
     public string $direction;
+
+    public function __construct(string $column, string $direction)
+    {
+        $this->column = $column;
+        $this->direction = $direction;
+    }
 }

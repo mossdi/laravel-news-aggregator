@@ -27,7 +27,7 @@ class NewsApiJob implements ShouldQueue
         private readonly ArticleHelper $articleHelper
     )
     {
-        $this->requestParameters = EverythingRequestParameters::fromArray([
+        $this->requestParameters = EverythingRequestParameters::from([
             'q' => $this->q,
             'from' => $this->articleHelper->getMaxPublishedAt()
         ]);

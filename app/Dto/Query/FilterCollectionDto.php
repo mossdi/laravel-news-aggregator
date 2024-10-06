@@ -15,4 +15,9 @@ class FilterCollectionDto extends BaseDto
         items: new OA\Items(ref: '#/components/schemas/FilterDto')
     )]
     public ?array $items;
+
+    public function __construct(?array $items)
+    {
+        $this->items = $items;
+    }
 }

@@ -15,4 +15,9 @@ class ExclusionCollectionDto extends BaseDto
         items: new OA\Items(ref: '#/components/schemas/ExclusionDto')
     )]
     public ?array $items;
+
+    public function __construct(?array $items)
+    {
+        $this->items = $items;
+    }
 }

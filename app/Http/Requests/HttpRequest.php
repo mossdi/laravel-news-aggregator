@@ -36,15 +36,15 @@ class HttpRequest extends FormRequest
     protected function prepareForValidation()
     {
         if (!empty($filters = $this->get('filters'))) {
-            $this->filters = FilterCollectionDto::fromArray($filters);
+            $this->filters = FilterCollectionDto::from($filters);
         }
 
         if (!empty($exclusions = $this->get('exclusions'))) {
-            $this->exclusions = ExclusionCollectionDto::fromArray($exclusions);
+            $this->exclusions = ExclusionCollectionDto::from($exclusions);
         }
 
         if (!empty($sort = $this->get('sort'))) {
-            $this->sort = SortDto::fromArray($sort);
+            $this->sort = SortDto::from($sort);
         }
 
         $this->page = $this->get('page');

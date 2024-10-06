@@ -20,4 +20,11 @@ class FilterDto extends BaseDto
         default: ConditionOperator::LIKE->value
     )]
     public string $operator;
+
+    public function __construct(string $column, string $search, string $operator)
+    {
+        $this->column = $column;
+        $this->search = $search;
+        $this->operator = $operator;
+    }
 }
