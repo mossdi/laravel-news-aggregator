@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Interfaces\IMustVerifyTelegram;
+use App\Interfaces\IMustVerifyCode;
 use App\Traits\HasTelegramVerification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -13,7 +13,7 @@ use Illuminate\Support\Carbon;
  * @property string $verification_code
  * @property Carbon $verified_at
  */
-class User extends Authenticatable implements IMustVerifyTelegram
+class User extends Authenticatable implements IMustVerifyCode
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, HasTelegramVerification, Notifiable;

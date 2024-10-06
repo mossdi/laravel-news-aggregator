@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Interfaces\IMustVerifyTelegram;
+use App\Interfaces\IMustVerifyCode;
 use Closure;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -10,7 +10,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\URL;
 
-class EnsureTelegramIsVerified
+class EnsureCodeIsVerified
 {
     /**
      * Specify the redirect route for the middleware.
@@ -33,7 +33,7 @@ class EnsureTelegramIsVerified
      */
     public function handle($request, Closure $next, $redirectToRoute = null)
     {
-        if (!$request->user() || ($request->user() instanceof IMustVerifyTelegram && !$request->user()->hasVerifiedCode())) {
+        if (!$request->user() || ($request->user() instanceof IMustVerifyCode && !$request->user()->hasVerifiedCode())) {
             return $request->expectsJson()
                 ? abort(403, 'Your account is not verified.')
                 : Redirect::guest(URL::route($redirectToRoute ?: 'telegram.verification.notice'));

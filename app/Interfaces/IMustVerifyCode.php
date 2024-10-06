@@ -2,7 +2,7 @@
 
 namespace App\Interfaces;
 
-interface IMustVerifyTelegram
+interface IMustVerifyCode
 {
     public function sendCodeNotification(): void;
 

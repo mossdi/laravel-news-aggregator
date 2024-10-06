@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Middleware\EnsureTelegramIsVerified;
+use App\Http\Middleware\EnsureCodeIsVerified;
 use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
@@ -18,7 +18,7 @@ Route::get('/', function () {
 });
 
 Route::middleware([
-    EnsureTelegramIsVerified::class,
+    EnsureCodeIsVerified::class,
     Authenticate::class,
 ])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
