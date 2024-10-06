@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\WebAuth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 
-class AccountVerificationNoticeController extends Controller
+class EmailVerificationPromptController extends Controller
 {
     /**
      * Display the email verification prompt.
@@ -17,6 +17,6 @@ class AccountVerificationNoticeController extends Controller
     {
         return $request->user()->hasVerifiedEmail()
                     ? redirect()->intended(route('dashboard', absolute: false))
-                    : Inertia::render('Auth/VerifyTelegram', ['status' => session('status')]);
+                    : Inertia::render('Auth/VerifyEmail', ['status' => session('status')]);
     }
 }
