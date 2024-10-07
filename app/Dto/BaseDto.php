@@ -5,7 +5,7 @@ namespace App\Dto;
 use Illuminate\Contracts\Support\Arrayable;
 use Spatie\LaravelData\Data;
 
-class BaseDto extends Data implements Arrayable
+abstract class BaseDto extends Data implements Arrayable
 {
     //
 }
