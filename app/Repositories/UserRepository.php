@@ -6,13 +6,13 @@ use App\Dto\Query\ExclusionCollectionDto;
 use App\Dto\Query\FilterCollectionDto;
 use App\Dto\Query\SortDto;
 use App\Helpers\RepositoryHelper;
-use App\Interfaces\IBaseRepository;
+use App\Interfaces\IUserRepository;
 use App\Models\User;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 
-class UserRepository implements IBaseRepository
+class UserRepository implements IUserRepository
 {
     public function __construct(private readonly RepositoryHelper $helper)
     {

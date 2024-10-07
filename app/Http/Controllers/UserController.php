@@ -4,13 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\HttpRequest;
 use App\Http\Resources\UserCollection;
-use App\Repositories\UserRepository;
+use App\Interfaces\IUserRepository;
 use Illuminate\Http\Resources\Json\JsonResource;
 use OpenApi\Attributes as OA;
 
 class UserController extends Controller
 {
-    public function __construct(private readonly UserRepository $repository)
+    public function __construct(private readonly IUserRepository $repository)
     {
     }
 

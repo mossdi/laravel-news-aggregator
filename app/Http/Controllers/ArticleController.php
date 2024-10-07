@@ -4,13 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\HttpRequest;
 use App\Http\Resources\ArticleCollection;
-use App\Repositories\ArticleRepository;
+use App\Interfaces\IArticleRepository;
 use Illuminate\Http\Resources\Json\JsonResource;
 use OpenApi\Attributes as OA;
 
 class ArticleController extends Controller
 {
-    public function __construct(private readonly ArticleRepository $repository)
+    public function __construct(private readonly IArticleRepository $repository)
     {
     }
 
